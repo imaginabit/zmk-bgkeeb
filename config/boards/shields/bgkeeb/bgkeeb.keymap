@@ -3,24 +3,6 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
-    behaviors {
-        rot_cw: rot_cw {
-            compatible = "zmk,behavior-sensor-key-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&kp C_VOL_UP>;
-        };
-        rot_ccw: rot_ccw {
-            compatible = "zmk,behavior-sensor-key-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&kp C_VOL_DN>;
-        };
-        enc_press: enc_press {
-            compatible = "zmk,behavior-sensor-key-press";
-            #sensor-binding-cells = <0>;
-            bindings = <&kp C_MUTE>;
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
 

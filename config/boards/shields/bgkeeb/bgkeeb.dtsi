@@ -107,9 +107,8 @@
         compatible = "zmk,keymap-sensors";
         sensors = <&encoder>;
         triggers-per-rotation = <20>;
-        // Bind encoder events to behaviors defined in bgkeeb.keymap.
-        // Format: rotate CW, rotate CCW, press.
-        sensor-bindings = <&rot_cw>, <&rot_ccw>, <&enc_press>;
+        // Encoder bindings via &kp directly (legacy / pre-sensor-bindings).
+        // sensor-bindings property removed (not in current zmk,keymap-sensors yaml).
     };
 
     // Battery monitoring via nRF52840 internal VDDH voltage divider (no extra GPIO).
