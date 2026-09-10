@@ -1,7 +1,12 @@
 #include "bgkeeb.dtsi" // Notice that the main dtsi files are included in the overlay.
 
-// Sin col-offset: el keymap bgkeeb.keymap es compartido de 5 cols y cada mitad
-// mapea sus 5 columnas físicas a las mismas 5 posiciones del keymap.
+// Right half: physical cols 0-4 → keymap cols 5-9 (col-offset=5).
+// Left half uses 0-4 (no offset). Each half has 5 unique physical columns;
+// together they fill a 10-col unified keymap.
+
+&default_transform {
+    col-offset = <5>;
+};
 
 &kscan0 {
     // #define MATRIX_ROW_PINS { F6, D7, B3, E6 }     == { 19, 6, 14, 7 }
