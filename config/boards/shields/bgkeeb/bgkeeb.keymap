@@ -24,8 +24,8 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // LAYER 0 — Base: QWERTY split + thumbs.
-        // 4 rows × 5 cols × 2 halves = 30 main + 6 thumbs = 36 total.
+        // LAYER 0 — Base QWERTY split + thumbs.
+        // 36 bindings: 4 rows × 5 cols × 2 halves = 30 main + 6 thumbs.
         base {
             bindings = <
                 &kp Q     &kp W     &kp E     &kp R     &kp T
@@ -60,20 +60,20 @@
                 &kp LSFT(N6) &kp LSFT(N7) &kp LSFT(N8) &kp LSFT(N9) &kp LSFT(N0)
                 &kp CAPS     &kp RALT     &kp BSLH     &kp RBKT     &kp HOME
                 &kp HOME     &kp END      &kp UP       &kp DOWN     &kp DEL
-                &kp RALT(LBKT) &kp RALT(RBKT) &kp LA(BSLH) &kp LA(TILDE) &kp UNDER
-                &kp DOLLAR   &kp PLUS     &kp MINUS    &kp EQUAL    &kp BSLH
+                &kp RALT(LBKT) &kp RALT(RBKT) &kp LS(BSLH) &kp LS(TILDE) &kp UNDER
+                &kp DQT      &kp PLUS     &kp MINUS    &kp EQUAL    &kp BSLH
                 &trans       &trans      &trans
                 &trans       &lt 3 SPACE &trans
             >;
         };
 
-        // LAYER 3 — Adjust: F-keys + RGB + Bootloader + Reset.
+        // LAYER 3 — Adjust: F-keys + Reset/Bootloader (RGB controls removed for simplicity).
         adjust {
             bindings = <
                 &kp F1      &kp F2      &kp F11     &kp F12     &bootloader
                 &kp F6      &kp F7      &kp F8      &kp F9      &kp F10
-                &rgb_hui    &rgb_sai    &rgb_bri    &rgb_tog    &sys_reset
-                &rgb_hud    &rgb_sad    &rgb_brd    &rgb_efr    &reset
+                &kp KP_NUM  &kp PSCRN  &kp SLCK   &trans     &sys_reset
+                &kp LEFT    &kp DOWN   &kp UP     &kp RIGHT  &reset
                 &mo 4       &trans      &trans     &trans     &trans
                 &trans      &trans      &trans     &trans     &trans
                 &trans      &trans      &trans
@@ -85,9 +85,9 @@
         numpad {
             bindings = <
                 &bootloader &kp HOME     &kp UP     &kp END     &trans
-                &kp KP_DIV   &kp N7      &kp N8     &kp N9      &kp KP_PLUS
+                &kp KP_DIVIDE &kp N7     &kp N8     &kp N9      &kp KP_PLUS
                 &kp LEFT     &kp DOWN    &kp RIGHT  &kp MAC_CUT &kp MAC_PASTE
-                &kp KP_MULT  &kp N4      &kp N5     &kp N6       &kp COMMA
+                &kp KP_MULTIPLY &kp N4   &kp N5     &kp N6       &kp COMMA
                 &kp MAC_COPY &kp MAC_PASTE &kp KP_NUM &trans     &trans
                 &kp KP_MINUS &kp N1      &kp N2     &kp N3       &kp EQUAL
                 &trans       &trans     &trans
