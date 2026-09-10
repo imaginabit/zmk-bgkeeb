@@ -7,13 +7,12 @@
 
         // Layer 0: QWERTY split layout (4 rows x 10 cols).
         // Left half: cols 0-4. Right half: cols 5-9 (mirrored typing row).
-        // G (left RC(1,4))  = studio_unlock (ZMK Studio gate).
-        // Thumb row keep-right is the conventional split layout.
+        // G typed normally; ZMK Studio unlock only via Q+W+E+R 4-key combo below.
         base {
             label = "Base";
             bindings = <
                 &kp Q         &kp W         &kp E         &kp R         &kp T         &kp Y         &kp U         &kp I         &kp O         &kp P
-                &kp A         &kp S         &kp D         &kp F         &studio_unlock  &kp SEMI     &kp L         &kp K         &kp J         &kp H
+                &kp A         &kp S         &kp D         &kp F         &kp G         &kp SEMI     &kp L         &kp K         &kp J         &kp H
                 &kp Z         &kp X         &kp C         &kp V         &kp B         &kp SLASH    &kp PERIOD   &kp COMMA    &kp M         &kp N
                               &kp ENTER     &kp SPACE     &mo 1         &mo 2         &kp BSPC      &kp TAB      &kp LSHFT
             >;
@@ -30,16 +29,11 @@
             >;
         };
 
-        // Combos de desbloqueo ZMK Studio (sobre left half, cols 0-4).
-        // Q+W + Q+W+E+R siguen funcionando igual que antes.
+        // Único unlock: combo Q+W+E+R (4 teclas, RC(0,0)-(0,3) izquierda).
+        // Hold ~80ms → desbloquea ZMK Studio. Sin tecla única ni Q+W.
         combos {
             compatible = "zmk,combos";
-            combo_qw {
-                timeout-ms = <50>;
-                bindings = <&studio_unlock>;
-                key-positions = <0 0 0 1>;
-            };
-            combo_qwer {
+            combo_studio_unlock {
                 timeout-ms = <80>;
                 bindings = <&studio_unlock>;
                 key-positions = <0 0 0 1 0 2 0 3>;
