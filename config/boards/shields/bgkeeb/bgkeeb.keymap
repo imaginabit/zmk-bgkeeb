@@ -24,11 +24,8 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // ================================================================
-        // LAYER 0 — Base: QWERTY split + thumb mods.
-        // 36 bindings per layer: 4 rows × 5 cols × 2 halves = 30 main + 6 thumbs.
-        // Thumb layout per half = (col 2, col 3, col 4) = (TAB, Mo1, LCtl) | (LGui, BkSp, Lt2).
-        // ================================================================
+        // LAYER 0 — Base: QWERTY split + thumbs.
+        // 4 rows × 5 cols × 2 halves = 30 main + 6 thumbs = 36 total.
         base {
             bindings = <
                 &kp Q     &kp W     &kp E     &kp R     &kp T
@@ -42,9 +39,7 @@
             >;
         };
 
-        // ================================================================
-        // LAYER 1 — Lower: números shifted, navegación, cursores.
-        // ================================================================
+        // LAYER 1 — Lower: shifted nums + nav + arrows.
         lower {
             bindings = <
                 &kp LS(N1) &kp LS(N2) &kp LS(N3) &kp LS(N4) &kp LS(N5)
@@ -58,9 +53,7 @@
             >;
         };
 
-        // ================================================================
-        // LAYER 2 — Raise: símbolos shifted, brackets, paréntesis.
-        // ================================================================
+        // LAYER 2 — Raise: símbolos shifted + brackets + paréntesis.
         raise {
             bindings = <
                 &kp LSFT(N1) &kp LSFT(N2) &kp LSFT(N3) &kp LSFT(N4) &kp LSFT(N5)
@@ -74,15 +67,13 @@
             >;
         };
 
-        // ================================================================
-        // LAYER 3 — Adjust: F-keys, RGB, Bootloader, Reset.
-        // ================================================================
+        // LAYER 3 — Adjust: F-keys + RGB + Bootloader + Reset.
         adjust {
             bindings = <
-                &kp F1      &kp F2      &kp F11     &kp F12     &kp BOOTLOADER
+                &kp F1      &kp F2      &kp F11     &kp F12     &bootloader
                 &kp F6      &kp F7      &kp F8      &kp F9      &kp F10
-                &kp RGB_HUI &kp RGB_SAI &kp RGB_BRI &kp RGB_TOG &kp SYS_RESET
-                &kp RGB_HUD &kp RGB_SAD &kp RGB_BRD &kp RGB_EFR &kp RESET
+                &rgb_hui    &rgb_sai    &rgb_bri    &rgb_tog    &sys_reset
+                &rgb_hud    &rgb_sad    &rgb_brd    &rgb_efr    &reset
                 &mo 4       &trans      &trans     &trans     &trans
                 &trans      &trans      &trans     &trans     &trans
                 &trans      &trans      &trans
@@ -90,25 +81,21 @@
             >;
         };
 
-        // ================================================================
         // LAYER 4 — Numpad / Bootloader / Clipboard.
-        // ================================================================
         numpad {
             bindings = <
-                &kp BOOTLOADER &kp HOME     &kp UP     &kp END     &trans
-                &kp KP_DIV     &kp N7      &kp N8     &kp N9      &kp KP_PLUS
-                &kp LEFT       &kp DOWN    &kp RIGHT  &kp MAC_CUT &kp MAC_PASTE
-                &kp KP_MULT    &kp N4      &kp N5     &kp N6       &kp COMMA
-                &kp MAC_COPY   &kp MAC_PASTE &kp KP_NUM &trans     &trans
-                &kp KP_MINUS   &kp N1      &kp N2     &kp N3       &kp EQUAL
-                &trans         &trans     &trans
-                &kp SPACE      &kp BSPC    &kp N0
+                &bootloader &kp HOME     &kp UP     &kp END     &trans
+                &kp KP_DIV   &kp N7      &kp N8     &kp N9      &kp KP_PLUS
+                &kp LEFT     &kp DOWN    &kp RIGHT  &kp MAC_CUT &kp MAC_PASTE
+                &kp KP_MULT  &kp N4      &kp N5     &kp N6       &kp COMMA
+                &kp MAC_COPY &kp MAC_PASTE &kp KP_NUM &trans     &trans
+                &kp KP_MINUS &kp N1      &kp N2     &kp N3       &kp EQUAL
+                &trans       &trans     &trans
+                &kp SPACE    &kp BSPC    &kp N0
             >;
         };
 
-        // ================================================================
-        // Combos — único unlock ZMK Studio: Q+W+E+R (RC 0,0..0,3 left half).
-        // ================================================================
+        // Combos: único unlock ZMK Studio = Q+W+E+R (RC 0,0..0,3 left).
         combos {
             compatible = "zmk,combos";
             studio_unlock {
