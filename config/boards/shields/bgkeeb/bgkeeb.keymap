@@ -4,7 +4,6 @@
 
 / {
     behaviors {
-        // Rotary encoder behaviors (asignados al sensor en dtsi).
         rot_cw: rot_cw {
             compatible = "zmk,behavior-sensor-key-rotate";
             #sensor-binding-cells = <0>;
@@ -25,12 +24,11 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // LAYER 0 — Base QWERTY split + mods + combo unlock ZMK Studio.
-        //   Q  W  E  R  T       Y  U  I  O  P
-        //   A  S  D  F  G       H  J  K  L  ;
-        //   Z  X  C  V  B       N  M  ,  .  /
-        //   Tab Mo1 LCtl        LGui BkSp Lt2(Space)
-        // Encoder (left): rot CW/CCW = Vol+/- ; press = Mute
+        // ================================================================
+        // LAYER 0 — Base: QWERTY split + thumb mods.
+        // 36 bindings per layer: 4 rows × 5 cols × 2 halves = 30 main + 6 thumbs.
+        // Thumb layout per half = (col 2, col 3, col 4) = (TAB, Mo1, LCtl) | (LGui, BkSp, Lt2).
+        // ================================================================
         base {
             bindings = <
                 &kp Q     &kp W     &kp E     &kp R     &kp T
@@ -44,11 +42,9 @@
             >;
         };
 
-        // LAYER 1 — Lower: números, navegación, mods.
-        //   !1  @2  #3  $4  %5     ^6  &7  *8  (9  )0
-        //   PgUp PgDn End  Esc Del Left Up Down Right Ins
-        //   [  ]  LSft< LSft>     Home CapsLk BkSp LShft RAlt
-        //   Tab trans LCtl LAlt Enter Lt3(Enter)
+        // ================================================================
+        // LAYER 1 — Lower: números shifted, navegación, cursores.
+        // ================================================================
         lower {
             bindings = <
                 &kp LS(N1) &kp LS(N2) &kp LS(N3) &kp LS(N4) &kp LS(N5)
@@ -57,34 +53,30 @@
                 &kp LEFT   &kp UP     &kp DOWN   &kp RIGHT  &kp INS
                 &kp LBKT   &kp RBKT   &kp LSFT(LBKT) &kp LSFT(RBKT) &kp SEMI
                 &kp HOME   &kp CAPS   &kp BSPC   &kp LSHFT  &kp RALT
-                &kp TAB    &trans     &kp LCTL   &kp LALT
+                &trans     &trans    &trans
                 &trans     &lt 3 ENTER &kp ENTER
             >;
         };
 
-        // LAYER 2 — Raise: símbolos shifted y cursores/bracket pairs.
-        //   LSft1..LSft0          ^   &   *   (   )
-        //   CapsLk RAlt | [|     Home End Up Down Del
-        //   {[(~    <   >   _     $   +   -   =   \
-        //   trans Mo1 trans LGui BkSp  Lt3(Space)
+        // ================================================================
+        // LAYER 2 — Raise: símbolos shifted, brackets, paréntesis.
+        // ================================================================
         raise {
             bindings = <
                 &kp LSFT(N1) &kp LSFT(N2) &kp LSFT(N3) &kp LSFT(N4) &kp LSFT(N5)
                 &kp LSFT(N6) &kp LSFT(N7) &kp LSFT(N8) &kp LSFT(N9) &kp LSFT(N0)
                 &kp CAPS     &kp RALT     &kp BSLH     &kp RBKT     &kp HOME
                 &kp HOME     &kp END      &kp UP       &kp DOWN     &kp DEL
-                &kp RALT(LBKT)&kp RALT(RBKT)&kp LA(BSLH) &kp LA(TILDE) &kp UNDER
+                &kp RALT(LBKT) &kp RALT(RBKT) &kp LA(BSLH) &kp LA(TILDE) &kp UNDER
                 &kp DOLLAR   &kp PLUS     &kp MINUS    &kp EQUAL    &kp BSLH
-                &trans       &mo 1        &trans       &kp LGUI
-                &kp BSPC     &lt 3 SPACE  &kp SPACE
+                &trans       &trans      &trans
+                &trans       &lt 3 SPACE &trans
             >;
         };
 
+        // ================================================================
         // LAYER 3 — Adjust: F-keys, RGB, Bootloader, Reset.
-        //   F1  F2  F11 F12 BOOT   F6  F7  F8  F9  F10
-        //   RGB-Hue/+/Sat/+/Bri/+  RGB-Hue/Sat/Bri/Ani next SysRst
-        //   ToggleEff Mo4 trans   trans trans trans trans
-        //   LGui trans trans      Enter RAlt trans
+        // ================================================================
         adjust {
             bindings = <
                 &kp F1      &kp F2      &kp F11     &kp F12     &kp BOOTLOADER
@@ -93,16 +85,14 @@
                 &kp RGB_HUD &kp RGB_SAD &kp RGB_BRD &kp RGB_EFR &kp RESET
                 &mo 4       &trans      &trans     &trans     &trans
                 &trans      &trans      &trans     &trans     &trans
-                &kp LGUI    &trans      &trans     &trans
-                &kp ENTER   &kp RALT    &trans
+                &trans      &trans      &trans
+                &trans      &trans      &trans
             >;
         };
 
-        // LAYER 4 — Numpad / Boot / Clipboard.
-        //   BOOT  Home Up End (...)    / 7 8 9 +
-        //   Left  Down Right Cut Paste * 4 5 6 ,
-        //   Copy  Paste NumLk ... - 1 2 3 =
-        //   trans trans ... ... Space BkSp 0
+        // ================================================================
+        // LAYER 4 — Numpad / Bootloader / Clipboard.
+        // ================================================================
         numpad {
             bindings = <
                 &kp BOOTLOADER &kp HOME     &kp UP     &kp END     &trans
@@ -111,13 +101,14 @@
                 &kp KP_MULT    &kp N4      &kp N5     &kp N6       &kp COMMA
                 &kp MAC_COPY   &kp MAC_PASTE &kp KP_NUM &trans     &trans
                 &kp KP_MINUS   &kp N1      &kp N2     &kp N3       &kp EQUAL
-                &trans         &trans     &trans    &trans      &trans
-                &trans         &trans     &kp SPACE &kp BSPC    &kp N0
+                &trans         &trans     &trans
+                &kp SPACE      &kp BSPC    &kp N0
             >;
         };
 
-        // Combos
-        // ÚNICO unlock ZMK Studio: Q+W+E+R (RC 0,0..0,3 left half top).
+        // ================================================================
+        // Combos — único unlock ZMK Studio: Q+W+E+R (RC 0,0..0,3 left half).
+        // ================================================================
         combos {
             compatible = "zmk,combos";
             studio_unlock {
