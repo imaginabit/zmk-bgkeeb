@@ -1,8 +1,7 @@
 #include "bgkeeb.dtsi" // Notice that the main dtsi files are included in the overlay.
 
-&default_transform { // The matrix transform for this board is 5 columns over because the left half is 5 columns wide according to the matrix.
-    col-offset = <5>;
-};
+// Sin col-offset: el keymap bgkeeb.keymap es compartido de 5 cols y cada mitad
+// mapea sus 5 columnas físicas a las mismas 5 posiciones del keymap.
 
 &kscan0 {
     // #define MATRIX_ROW_PINS { F6, D7, B3, E6 }     == { 19, 6, 14, 7 }
