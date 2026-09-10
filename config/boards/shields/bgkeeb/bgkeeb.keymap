@@ -5,24 +5,45 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // Keymap de diagnóstico: cada posición escribe un símbolo único.
-        // Pulsar switch físico → ver símbolo → identificar posición real.
-        //
-        // Posición (row,col):
-        //   (0,0)=1 (0,1)=2 (0,2)=3 (0,3)=4 (0,4)=5
-        //   (1,0)=6 (1,1)=7 (1,2)=8 (1,3)=9 (1,4)=0
-        //   (2,0)=! (2,1)=@ (2,2)=# (2,3)=$ (2,4)=%
-        //   (3,0)=^ (3,1)=& (3,2)=* (3,3)=( (3,4)=)
-        //
-        // Sin G/studio_unlock: si el problema es de mapeo, no atascar Studio.
+        // Layer 0: QWERTY (con desbloqueos para ZMK Studio).
+        // G (row 1, col 4)              -> &studio_unlock (desbloqueo)
+        // Combo Q+W (50ms)              -> &studio_unlock
+        // Combo Q+W+E+R (80ms)          -> &studio_unlock (alternativa)
         base {
             label = "Base";
             bindings = <
-                &kp N1     &kp N2     &kp N3     &kp N4     &kp N5
-                &kp N6     &kp N7     &kp N8     &kp N9     &kp N0
-                &kp LS(N1) &kp LS(N2) &kp LS(N3) &kp LS(N4) &kp LS(N5)
-                &kp LS(N6) &kp LS(N7) &kp LS(N8) &kp LS(N9) &kp LS(N0)
+                &kp Q         &kp W         &kp E         &kp R         &kp T
+                &kp A         &kp S         &kp D         &kp F         &studio_unlock
+                &kp Z         &kp X         &kp C         &kp V         &kp B
+                              &none         &kp ENTER     &kp SPACE     &mo 1
             >;
+        };
+
+        // Layer 1: números y símbolos (mantener thumb derecho).
+        num {
+            label = "Num";
+            bindings = <
+                &kp N1        &kp N2        &kp N3        &kp N4        &kp N5
+                &kp N6        &kp N7        &kp N8        &kp N9        &kp N0
+                &kp MINUS     &kp EQUAL     &kp BSLH      &kp GRAVE     &kp LBKT
+                              &none         &kp ENTER     &kp SPACE     &kp LSHFT
+            >;
+        };
+
+        // Combos de desbloqueo ZMK Studio.
+        // Positions = flat array (parejas row,col).
+        combos {
+            compatible = "zmk,combos";
+            combo_qw {
+                timeout-ms = <50>;
+                bindings = <&studio_unlock>;
+                key-positions = <0 0 0 1>;
+            };
+            combo_qwer {
+                timeout-ms = <80>;
+                bindings = <&studio_unlock>;
+                key-positions = <0 0 0 1 0 2 0 3>;
+            };
         };
     };
 };
